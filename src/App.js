@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid, Icon, Header, Segment, Message, Form} from 'semantic-ui-react'
+import {Grid, Icon, Header, Segment, Message, Form, Container} from 'semantic-ui-react'
 import "./App.scss";
 import ChooseName from "./ChooseName.js";
 import Options from "./Options";
@@ -42,26 +42,27 @@ class App extends React.Component {
 
     render() {
         return (
-
-            <Grid verticalAlign="middle" textAlign="center" className={'board'}>
-                <Grid.Column className={'boardColumn'}>
-                    <Header as="h2">
-                        Local Voting System
-                    </Header>
-                    <Header as="h3" attached="top">
-                        {this.state.title}
-                    </Header>
-                    <ChooseName handle={this.toStep2} show={this.state.stepNumber == 1}/>
-                    <Options handle={this.toStep3} show={this.state.stepNumber == 2}/>
-                    <Votes options={this.state.options} handle={this.toStep4} show={this.state.stepNumber == 3}/>
-                    <Result votes={this.state.votes} show={this.state.stepNumber == 4}/>
-                    <Message>
-                        Design with <Icon name="heart" color="red" fitted/> by <a href="https://alireza.atofighi.ir"
-                                                                                  target="_blank">AliReza Tofighi</a>
-                    </Message>
-                </Grid.Column>
-            </Grid>
-
+            <Container className={'boardContainer'}>
+                <Grid verticalAlign="middle" textAlign="center" className={'board'}>
+                    <Grid.Column className={'boardColumn'}>
+                        <Header as="h2">
+                            Local Voting System
+                        </Header>
+                        <Header as="h3" attached="top">
+                            {this.state.title}
+                        </Header>
+                        <ChooseName handle={this.toStep2} show={this.state.stepNumber == 1}/>
+                        <Options handle={this.toStep3} show={this.state.stepNumber == 2}/>
+                        <Votes options={this.state.options} handle={this.toStep4} show={this.state.stepNumber == 3}/>
+                        <Result votes={this.state.votes} show={this.state.stepNumber == 4}/>
+                        <Message>
+                            Design with <Icon name="heart" color="red" fitted/> by <a href="https://alireza.atofighi.ir"
+                                                                                      target="_blank">AliReza
+                            Tofighi</a>
+                        </Message>
+                    </Grid.Column>
+                </Grid>
+            </Container>
         );
     }
 }

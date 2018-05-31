@@ -1,6 +1,4 @@
 node_modules/
 dist/
-js/
-css/
-old.html
+.idea/
 package-lock.json

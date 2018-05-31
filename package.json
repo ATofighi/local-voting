@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/atofighi/simple-local-voting"
+    "url": "github.com/atofighi/local-voting"
   },
   "keywords": [
     "poll",
