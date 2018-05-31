@@ -1,56 +1,57 @@
 import React from "react";
-import {Grid, Icon, Header, Segment, Message, Form} from 'semantic-ui-react'
+import {Grid, Icon, Header, Segment, Message, Form, Select} from 'semantic-ui-react'
 import Option from "./Option";
 
-class Options extends React.Component {
+class Votes extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {votes: [], currentVote: ''};
+        this.handleChange = this.handleChange.bind(this);
+        this.addVote = this.addVote.bind(this);
         this.handle = this.handle.bind(this);
-        this.handleOptionChange = this.handleOptionChange.bind(this);
-        this.addOption = this.addOption.bind(this);
-        this.state = {options: [""]};
     }
 
-    handleOptionChange(key, value) {
-        if (value == '') {
-            delete this.state.options[key];
-        } else {
-            this.state.options[key] = value;
-        }
+    handleChange(e, {name, value}) {
+        this.setState({currentVote: value});
+    }
+
+    addVote() {
+        this.state.votes.push(this.state.currentVote);
+        this.state.currentVote = '';
         this.setState(this.state);
     }
-
 
     handle() {
-        this.props.handle(this.state.options);
-    }
-
-    addOption() {
-        this.state.options.push("");
-        this.setState(this.state);
+        this.props.handle(this.state.votes);
     }
 
     render() {
         if (!this.props.show) {
             return '';
         }
-        console.log(this.state);
         return (<Segment stacked attached>
             <Form>
-                {
-                    this.state.options.map((option, index) => {
-                        return (
-                            <Option key={index} id={index} value={option} handle={this.handleOptionChange}/>
-                        )
-                    })
-                }
-                <Form.Group widths="equal">
-                    <Form.Button onClick={this.addOption} color="red">Add Option</Form.Button>
-                    <Form.Button color="blue" onClick={this.handle}>Next -></Form.Button>
+                <Form.Group>
+                    <Form.Select options={this.props.options.map((option, index) => {
+                        return {
+                            key: index,
+                            text: option,
+                            value: index
+                        };
+                    })} value={this.state.currentVote} width={11}
+                                 onChange={this.handleChange} placeholder='Select an option'/>
+                    <Form.Button onClick={this.addVote} width={5}>
+                        Add Vote
+                    </Form.Button>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Button onClick={this.handle} width={16}>
+                        Go to results ({this.state.votes.length} vote{(this.state.votes.length > 1 ? 's' : '')})
+                    </Form.Button>
                 </Form.Group>
             </Form>
         </Segment>);
     }
 }
 
-export default Options;
+export default Votes;
