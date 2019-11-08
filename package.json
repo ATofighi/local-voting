@@ -24,7 +24,7 @@
     "font-loader": "^0.1.2",
     "fontawesome": "^4.7.2",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react-dom": "^16.4.2",
     "url-loader": "^1.0.1"
   },
   "devDependencies": {
